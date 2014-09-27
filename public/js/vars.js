@@ -9,7 +9,7 @@ var name = "";
 var players = {
 	p1: {
 		turn: true,
-		ships: []
+		ships: [new Ship(0,0,"battleship"), new Ship(1,0,"destroyer"), new Ship(2, 0, "scout"), new Ship(3,0,"sub")]
 	},
 	p2: {
 		turn: false,
