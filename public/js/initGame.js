@@ -76,10 +76,8 @@ function initGame(name,players,socket) {
 	function update() {
 		if (players[name].turn){
 			turnnote.setText("");
-			console.log(players[name].turn)
 		} else {
 			turnnote.setText("It is not your turn!");
-			console.log(players[name].turn)
 		}
 		if (cursors.up.isDown) {
 			game.camera.y -= 10;
