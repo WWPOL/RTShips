@@ -59,21 +59,29 @@ function initGame(name,socket) {
 				var p1Battleship = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redbattleship');
 				p1Battleship.anchor.setTo(1.0, 1.0);
 				p1Battleship.scale.y = -1;
+				p1Battleship.inputEnabled = true;
+			    p1Battleship.input.enableDrag(true);
 				p1Sprites.push(p1Battleship);
 			}else if(players.p1.ships[i].type == 'destroyer'){
 				var p1Destroyer = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'reddestroyer');
 				p1Destroyer.anchor.setTo(1.0, 1.0);
 				p1Destroyer.scale.y = -1;
+				p1Destroyer.inputEnabled = true;
+			    p1Destroyer.input.enableDrag(true);
 				p1Sprites.push(p1Destroyer);
 			}else if(players.p1.ships[i].type == 'scout'){
 				var p1Scout = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redscout');
 				p1Scout.anchor.setTo(1.0, 1.0);
 				p1Scout.scale.y = -1;
+				p1Scout.inputEnabled = true;
+			    p1Scout.input.enableDrag(true);
 				p1Sprites.push(p1Scout);
 			}else if(players.p1.ships[i].type == 'sub'){
 				var p1Sub = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redsub');
 				p1Sub.anchor.setTo(1.0, 1.0);
 				p1Sub.scale.y = -1;
+				p1Sub.inputEnabled = true;
+			    p1Sub.input.enableDrag(true);
 				p1Sprites.push(p1Sub);
 			}
 		}
@@ -119,6 +127,18 @@ function initGame(name,socket) {
 		} else {
 			turnnote.setText("It is not your turn!");
 		}
+		/*if(name === "p1"){
+			p1Sprites.forEach(function(sprite){
+				sprite.x = Math.floor(sprite.x/100)*100;
+				sprite.y = Math.floor(sprite.y/100)*100;
+			});
+		}
+		if(name === "p2"){
+			p2Sprites.forEach(function(sprite){
+				sprite.x = Math.floor(sprite.x/100)*100;
+				sprite.y = Math.floor(sprite.y/100)*100;
+			});
+		}*/
 		if (cursors.up.isDown) {
 			game.camera.y -= 10;
 		} else if (cursors.down.isDown) {
@@ -130,18 +150,20 @@ function initGame(name,socket) {
 			game.camera.x += 10;
 		}
 
-		if(game.input.mousePointer.isDown && click){
+		/*if(game.input.mousePointer.isDown && click){
 			click = false;
 			if(players[name].turn){
-				var xClick = Math.floor((game.input.mousePointer.x + game.camera.x)/100)*100;
+				console.log("Mouse: (" + game.input.mousePointer.x + ", " + game.input.mousePointer.y + ")");
+				var xClick = (Math.floor((game.input.mousePointer.x + game.camera.x)/100) + 1)*100;
 				var yClick = Math.floor((game.input.mousePointer.y + game.camera.y)/100)*100;
-				console.log(xClick + " " + yClick);
+				console.log("Move to: (" + xClick + ", " + yClick + ")");
 				if(selected === null){
 					if(name === "p1"){
 						p1Sprites.forEach(function(sprite){
 							if(sprite.x === xClick && sprite.y === yClick){
 								selected = sprite;
 								click = true;
+								return true;
 							};
 						});
 					}
@@ -150,17 +172,22 @@ function initGame(name,socket) {
 							if(sprite.x === xClick && sprite.y === yClick){
 								selected = sprite;
 								click = true;
+								return true;
 							};
 						});
 					}
 				}else{
 					selected.x = xClick;
 					selected.y = yClick;
+					selected = null;
 					console.log(selected);
 					click = true;
+					return true;
 				}
 			}
-		}
+			click = true;
+			return false;
+		}*/
 	}
 
 	function render() {
