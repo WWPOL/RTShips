@@ -9,10 +9,10 @@ var name = "";
 var players = {
 	p1: {
 		turn: true,
-		ships: [new Ship(0,0,"battleship"), new Ship(1,0,"destroyer"), new Ship(2, 0, "scout"), new Ship(3,0,"sub")]
+		ships: [new Ship(13,0,"battleship"), new Ship(14,0,"destroyer"), new Ship(15, 0, "scout"), new Ship(16,0,"sub")]
 	},
 	p2: {
 		turn: false,
-		ships: []
+		ships: [new Ship(13, 37,"battleship"), new Ship(14, 38,"destroyer"), new Ship(15, 39, "scout"), new Ship(16, 39,"sub")]
 	}
 };
