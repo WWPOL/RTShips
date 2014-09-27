@@ -15,4 +15,6 @@ function initGame(){
 			gctx.drawImage("public/assets/tiles/water.png")
 		};
 	};
+	var then = Date.now();
+	main();
 }
