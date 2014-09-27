@@ -79,12 +79,16 @@ function initGame(name,players,socket) {
 		for(var i = 0; i < players.p2.ships.length; i++){
 			if(players.p2.ships[i].type == 'battleship'){
 				var p2Battleship = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluebattleship');
+				p2Sprites.push(p2Battleship)
 			}else if(players.p2.ships[i].type == 'destroyer'){
 				var p2Destroyer = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluedestroyer');
+				p2Sprites.push(p2Destroyer);
 			}else if(players.p2.ships[i].type == 'scout'){
 				var p2Scout = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluescout');
+				p2Sprites.push(p2Scout);
 			}else if(players.p2.ships[i].type == 'sub'){
 				var p2Sub = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluesub');
+				p2Sprites.push(p2Sub);
 			}
 		}
 
