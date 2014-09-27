@@ -9,10 +9,10 @@ var name = "";
 var players = {
 	p1: {
 		turn: true,
-		ships: [];
-	};
+		ships: []
+	},
 	p2: {
 		turn: false;
-		ships: [];
+		ships: []
 	}
 };
