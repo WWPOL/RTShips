@@ -10,6 +10,9 @@
 </head>
 
 <body>
+	<div id="paused">
+		Wait for other Player to finish turn
+	</div>
 	<script src = "/socket.io/socket.io.js"></script>
 	<canvas id="game"></canvas>
 	<script>
@@ -36,6 +39,11 @@
 			socket.on("yourTurn", function() {
 				alert("yourTurn");
 			});
+			if (players[name].isTurn) {
+				$("#paused").css("display", "none");
+			} else {
+				$("#paused").css("display", "block");
+			}
 		});
 	</script>
 	
