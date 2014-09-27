@@ -3,7 +3,7 @@
 <head>
 	<title>RTShips</title>
 	<script src="js/jquery.js"></script>
-	<script src="js/var.js"></script>
+	<script src="js/vars.js"></script>
 	<script src="js/initGame.js"></script>
 </head>
 
@@ -12,10 +12,17 @@
 	<canvas id="game"></canvas>
 	<script>
 		var socket = io();
+		var name;
 		$(document).ready(function(){
-			socket.on('initGame', function(){
-				initGame();
+			socket.on('initIndentity', function(identity){
+				name = indentity;
 			});
+			socket.on('initGame', function(){
+				initGame(name);
+			});
+			socket.on('full', function(){
+				alert("Server is full. Please come again");
+			})
 		});
 	</script>
 	
