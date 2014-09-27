@@ -16,7 +16,6 @@ function initGame(name) {
 		game.load.image('redsub','assets/ships/redsub.png');
 		game.load.image('explosion','assets/ships/explosion.png');
 		game.load.image('shell','assets/ships/shell.png');
-		game.load.image('cursor','assets/ships/cursor.png');
 
 		game.load.image('water', 'assets/tiles/water.png');
 		game.load.image('fog', 'assets/tiles/fog.png');
@@ -27,36 +26,27 @@ function initGame(name) {
 	}
 
 	var cursors;
-	var offsetX = 0;
-	var offsetY = 0;
 
 	function create() {
-		game.world.setBounds(0,0,5000,5000);
+		game.world.setBounds(0,0,3000,3000);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.stage.smoothed = false;
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-		tiles = game.add.tileSprite(0,0,5000,5000, 'water');
-		cursor = game.add.sprite(clientWidth/2,clientHeight/2,'cursor');
+		tiles = game.add.tileSprite(0,0,3000,3000, 'water');
 
 		cursors = game.input.keyboard.createCursorKeys();
 	}
 
 	function update() {
-		cursor.x = game.input.mousePointer.x + offsetX;
-		cursor.y = game.input.mousePointer.y + offsetY;
 		if (cursors.up.isDown) {
 			game.camera.y -= 10;
-			offsetY -= 10;
 		} else if (cursors.down.isDown) {
 			game.camera.y += 10;
-			offsetY += 10;
 		}
 		if (cursors.left.isDown) {
 			game.camera.x -= 10;
-			offsetX -= 10;
 		} else if (cursors.right.isDown) {
 			game.camera.x += 10;
-			offsetX += 10;
 		}
 	}
 

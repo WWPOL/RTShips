@@ -25,6 +25,7 @@ var gameStart = false;
 
 io.on('connection', function(socket){
 	//stuff about connections
+	socket.emit('initIdentity', socket.id);
 	console.log("A user connected");
 	connectedUsers.push(socket.id);
 	console.log(connectedUsers);
@@ -35,7 +36,7 @@ io.on('connection', function(socket){
 	}
 
 	if (connectedUsers.length < 2) {
-		io.emit("waitForJoin");
+		io.to(socket.id).emit("waitForJoin");
 	}
 
 	if (connectedUsers.length == 2) {
