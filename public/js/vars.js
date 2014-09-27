@@ -12,7 +12,7 @@ var players = {
 		ships: []
 	},
 	p2: {
-		turn: false;
+		turn: false,
 		ships: []
 	}
 };
