@@ -16,6 +16,7 @@ function initGame() {
 		game.load.image('redsub','assets/ships/redsub.png');
 		game.load.image('explosion','assets/ships/explosion.png');
 		game.load.image('shell','assets/ships/shell.png');
+		game.load.image('cursor','assets/ships/cursor.png');
 
 		game.load.image('water', 'assets/tiles/water.png');
 		game.load.image('fog', 'assets/tiles/fog.png');
@@ -27,14 +28,33 @@ function initGame() {
 
 	function create() {
 		game.world.setBounds(0,0,5000,5000);
+		game.physics.startSystem(Phaser.Physics.P2JS);
+		game.physics.p2.setImpactEvents(true);
+		game.physics.p2.updateBoundsCollisionGroup();
 		game.stage.smoothed = false;
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 		tiles = game.add.tileSprite(0,0,clientWidth,clientHeight, 'water');
-		tiles.
-		game.camera.follow(cursor);
+		tiles.fixedToCamera = true;
+		cursor = game.add.sprite(clientWidth/2,clientHeight/2,'cursor');
+			cursor.scale.set(0.0125);
+			game.phsics.p2.enable(cursor);
+			player.body.setZeroDamping();
+			player.body.setRectangle(25,25);
+			game.camera.follow(cursor);
 	}
 
 	function update() {
+		if (!game.camera.atLimit.x)
+	    {
+	        tiles.tilePosition.x -= (cursor.body.velocity.x * 2) * game.time.physicsElapsed;
+	    }
 
+	    if (!game.camera.atLimit.y)
+	    {
+	        tiles.tilePosition.y -= (cursor.body.velocity.y * 2) * game.time.physicsElapsed;
+	    }
+	}
+
+	function render() {
 	}
 }
