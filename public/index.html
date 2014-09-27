@@ -2,10 +2,17 @@
 <html>
 <head>
 	<title>RTShips</title>
+	<script src="js/jquery.js"></script>
 	<script src="js/var.js"></script>
 	<script src="js/initGame.js"></script>
 </head>
-<body onload="">
+
+<body>
+	<script src = "/socket.io/socket.io.js">
+	</script>
+	<script>
+		var socket = io();
+	</script>
 	<canvas id="game"></canvas>
 	<h1>Hello, World!</h1>
 </body>
