@@ -39,25 +39,27 @@ function initGame(name,players,socket) {
 		tiles = game.add.tileSprite(0,0,3000,3000, 'water');
 
 		cursors = game.input.keyboard.createCursorKeys();
+		console.log(players.p1.ships[0].type);
 		for(var i = 0; i < players.p1.ships.length; i++){
-			if(players.p1.ships.type =='battleship'){
+			if(players.p1.ships[i].type =='battleship'){
 				var p1Battleship = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redbattleship');
-			}else if(players.p1.ships.type == 'destroyer'){
+			}else if(players.p1.ships[i].type == 'destroyer'){
 				var p1Destroyer = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'reddestroyer');
-			}else if(players.p1.ships.type == 'scout'){
+				console.log("Ship added");
+			}else if(players.p1.ships[i].type == 'scout'){
 				var p1Scout = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redscout');
-			}else if(players.p1.ships.type == 'sub'){
+			}else if(players.p1.ships[i].type == 'sub'){
 				var p1Sub = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redsub');
 			}
 		}
 		for(var i = 0; i < players.p2.ships.length; i++){
-			if(players.p2.ships.type == 'battleship'){
+			if(players.p2.ships[i].type == 'battleship'){
 				var p2Battleship = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluebattleship');
-			}else if(players.p2.ships.type == 'destroyer'){
+			}else if(players.p2.ships[i].type == 'destroyer'){
 				var p2Destroyer = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluedestroyer');
-			}else if(players.p2.ships.type == 'scout'){
+			}else if(players.p2.ships[i].type == 'scout'){
 				var p2Scout = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluescout');
-			}else if(players.p2.ships.type == 'sub'){
+			}else if(players.p2.ships[i].type == 'sub'){
 				var p2Sub = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluesub');
 			}
 		}
