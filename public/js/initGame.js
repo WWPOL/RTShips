@@ -46,9 +46,8 @@ function initGame(name,players,socket) {
 		
 		for (var x = 0; x < 30; x++) {
 			for (var y = 0; y < 30; y++) {
-				//var tile = game.add.sprite(x * 100, y * 100, 'water');
-				var tile = game.add.button(x * 100, y * 100, 'water', moveShip(this.x,this.y), this);
-				console.log("tile")
+				var tile = game.add.sprite(x * 100, y * 100, 'water');
+				console.log("tile");
 				tiles.push(tile);
 			}
 		}
@@ -154,11 +153,5 @@ function initGame(name,players,socket) {
 
 	function actionOnClick () {
 	    socket.emit('move', [name, players]);
-	}
-
-	function moveShip(x,y) {
-		moving = true;
-		movex = x;
-		movey = y;
 	}
 }
