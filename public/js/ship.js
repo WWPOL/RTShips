@@ -30,12 +30,10 @@ Ship = function(x,y,type) {
 Ship.prototype.updateXY(x, y) {
 	this.x = x;
 	this.y = y;
-}
+};
 Ship.prototype.updateHealth = function(damageDone) {
 	this.health -= damageDone;
-};
-Ship.prototype.isAlive(){
 	if(this.health <= 0){
 		this.alive = false;
 	}
-}
+};

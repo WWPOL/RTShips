@@ -17,7 +17,7 @@
 		var name;
 		$(document).ready(function(){
 			socket.on("waitForJoin", function () {
-				alert("Waiting for another player to join");
+				alert("Waiting for another player to join!");
 			});
 			socket.on('initIdentity', function(identity){
 				name = identity;
