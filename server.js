@@ -21,11 +21,11 @@ io.on('connection', function(socket){
 		io.to(socket.id).emit("full");
 	}
 
-	if (connectedUsers.length < 2) {
+	if (connectedUsers.length > 2) {
 		io.emit("waitForJoin");
 	}
 
-	if (connectedUsers.length == 2) {
+	if (connectedUsers.length == 1) {
 		console.log("game start");
 		io.emit("initGame");
 	}

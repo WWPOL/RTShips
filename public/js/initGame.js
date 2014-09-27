@@ -28,34 +28,34 @@ function initGame(name) {
 
 	function create() {
 		game.world.setBounds(0,0,5000,5000);
-		game.physics.startSystem(Phaser.Physics.P2JS);
-		game.physics.p2.setImpactEvents(true);
-		game.physics.p2.updateBoundsCollisionGroup();
+		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.stage.smoothed = false;
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 		tiles = game.add.tileSprite(0,0,clientWidth,clientHeight, 'water');
 		tiles.fixedToCamera = true;
 		cursor = game.add.sprite(clientWidth/2,clientHeight/2,'cursor');
-			game.physics.p2.enable(cursor);
-			cursor.body.setZeroDamping();
-			cursor.body.setRectangle(12,22);
+			game.physics.arcade.enable(cursor);
 			game.camera.follow(cursor);
+
+		arrowkeys = game.input.keyboard.createCursorKeys();
 	}
 
 	function update() {
-		cursor.body.x = mouseX;
-		cursor.body.y = mouseY;
-		if (!game.camera.atLimit.x)
-	    {
-	        tiles.tilePosition.x -= (cursor.body.velocity.x * 2) * game.time.physicsElapsed;
-	    }
-
-	    if (!game.camera.atLimit.y)
-	    {
-	        tiles.tilePosition.y -= (cursor.body.velocity.y * 2) * game.time.physicsElapsed;
-	    }
+		cursor.x = game.input.mousePointer.x;
+		cursor.y = game.input.mousePointer.y;
+		if (arrowkeys.up.isDown) {
+			game.camera.y -= 5;
+		} else if (arrowkeys.down.isDown) {
+			game.camera.y += 5;
+		}
+		if (arrowkeys.left.isDown) {
+			game.camera.x -= 5;
+		} else if (arrowkeys.right.isDown) {
+			game.camera.x += 5;
+		}
 	}
 
 	function render() {
+		game.debug.cameraInfo(game.camera, 32,32);
 	}
 }
