@@ -35,26 +35,26 @@ function initGame(name,players) {
 		tiles = game.add.tileSprite(0,0,3000,3000, 'water');
 
 		cursors = game.input.keyboard.createCursorKeys();
-		for(int i = 0; i < players[p1].ships.length; i++){
-			if(players[p1].ships.type =='battleship'){
-				var p1Battleship = game.add.sprite(players[p1].ships[i].x*100, players[p1].ships[i].y*100, 'redbattleship');
-			}else if(players[p1].ships.type == 'destroyer'){
-				var p1Destroyer = game.add.sprite(players[p1].ships[i].x*100, players[p1].ships[i].y*100, 'reddestroyer');
-			}else if(players[p1].ships.type == 'scout'){
-				var p1Scout = game.add.sprite(players[p1].ships[i].x*100, players[p1].ships[i].y*100, 'redscout');
-			}else if(players[p1].ships.type == 'sub'){
-				var p1Sub = game.add.sprite(players[p1].ships[i].x*100, players[p1].ships[i].y*100, 'redsub');
+		for(var i = 0; i < players.p1.ships.length; i++){
+			if(players.p1.ships.type =='battleship'){
+				var p1Battleship = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redbattleship');
+			}else if(players.p1.ships.type == 'destroyer'){
+				var p1Destroyer = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'reddestroyer');
+			}else if(players.p1.ships.type == 'scout'){
+				var p1Scout = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redscout');
+			}else if(players.p1.ships.type == 'sub'){
+				var p1Sub = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redsub');
 			}
 		}
-		for(int i = 0; i < players[p2].ships.length; i++){
-			if(players[p2].ships.type == 'battleship'){
-				var p2Battleship = game.add.sprite(players[p2].ships[i].x*100, players[p2].ships[i].y*100, 'bluebattleship');
-			}else if(players[p2].ships.type == 'destroyer'){
-				var p2Destroyer = game.add.sprite(players[p2].ships[i].x*100, players[p2].ships[i].y*100, 'bluedestroyer');
-			}else if(players[p2].ships.type == 'scout'){
-				var p2Scout = game.add.sprite(players[p2].ships[i].x*100, players[p2].ships[i].y*100, 'bluescout');
-			}else if(players[p2].ships.type == 'sub'){
-				var p2Sub = game.add.sprite(players[p2].ships[i].x*100, players[p2].ships[i].y*100, 'bluesub');
+		for(var i = 0; i < players.p2.ships.length; i++){
+			if(players.p2.ships.type == 'battleship'){
+				var p2Battleship = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluebattleship');
+			}else if(players.p2.ships.type == 'destroyer'){
+				var p2Destroyer = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluedestroyer');
+			}else if(players.p2.ships.type == 'scout'){
+				var p2Scout = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluescout');
+			}else if(players.p2.ships.type == 'sub'){
+				var p2Sub = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluesub');
 			}
 		}
 	}
@@ -75,14 +75,11 @@ function initGame(name,players) {
 	}
 
 	function render() {
-		if(name == "p1"){
-			players[name].ships.forEach(function(ship){
+		players.p1.ships.forEach(function(ship){
 
-			});
-		}else{
-			players[p2].ships.forEach(function(ship){
+		});
+		players.p2.ships.forEach(function(ship){
 
-			});				
-		}
+		});
 	}
 }

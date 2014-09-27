@@ -6,11 +6,3 @@
 canvas {
 	position: absolute;
 }
-
-#paused {
-	background-color: rgba(50,50,50,0.5);
-	text-align: center;
-	width: 100%;
-	display: none;
-	height: 100%;
-}
