@@ -14,8 +14,8 @@
 		var socket = io();
 		var name;
 		$(document).ready(function(){
-			socket.on('initIndentity', function(identity){
-				name = indentity;
+			socket.on('initIdentity', function(identity){
+				name = identity;
 			});
 			socket.on('initGame', function(){
 				initGame(name);
