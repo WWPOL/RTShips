@@ -24,4 +24,17 @@ function initGame() {
 		game.load.audio('explosionsnd','assets/sounds/explosion.wav');
 		game.load.audio('shoot', 'assets/sounds/shoot.wav');
 	}
+
+	function create() {
+		game.world.setBounds(0,0,5000,5000);
+		game.stage.smoothed = false;
+		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+		tiles = game.add.tileSprite(0,0,clientWidth,clientHeight, 'water');
+		tiles.
+		game.camera.follow(cursor);
+	}
+
+	function update() {
+
+	}
 }
