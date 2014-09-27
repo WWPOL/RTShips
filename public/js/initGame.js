@@ -35,7 +35,7 @@ function initGame(){
 
 		then = now;
 		update();
-		render(gctx);
+		render();
 		requestAnimationFrame(main);
 	};
 	var update = function(){
@@ -43,9 +43,9 @@ function initGame(){
 			tile.update();
 		})
 	};
-	var render = function(ctx){
+	var render = function(){
 		tiles.forEach(function(tile){
-			tile.draw(ctx);
+			tile.draw(gctx);
 		})
 	};
 	var then = Date.now();

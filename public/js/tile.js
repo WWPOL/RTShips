@@ -2,11 +2,14 @@ Tile = function(x,y,type) {
 	this.x = x;
 	this.y = y;
 	this.type = type;
-	this.sprite = new Image('assets/tiles' + this.type + '.png');
+	this.sprite = new Image();
+	this.sprite.src = 'assets/tiles/' + this.type + '.png';
 }
 
-Tile.prototype.update = function(){
-	this.sprite = new Image('assets/tiles' + this.type + '.png');
+Tile.prototype.update = function(switchtile){
+	if (switchtile) {
+		this.sprite.src = 'assets/tiles/' + this.type + '.png';
+	}
 }
 
 Tile.prototype.draw = function(ctx) {
