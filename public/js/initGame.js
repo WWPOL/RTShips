@@ -208,6 +208,8 @@ function initGame(name,socket) {
 		else {
 			otherPlayer = "p1";
 		}
+		players.p1.ships = p1Sprites;
+		players.p2.ships = p2Sprites;
 		players[otherPlayer].turn = true;
 	    socket.emit('move', [name, players]);
 	}
