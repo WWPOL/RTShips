@@ -74,11 +74,12 @@ io.on('connection', function(socket){
 		if (player[movingPlayer].turn) {
 			player = clientInfo[1]; //player object
 			// console.log(movingPlayer + " " + otherPlayer);
-			player[movingPlayer].turn = false;
-			console.log("movingPlayer is " + movingPlayer + " and it is now " + player[movingPlayer].turn);
-			player[otherPlayer].turn = true;
-			console.log("otherPlayer is " + otherPlayer + " and it is now " + player[otherPlayer].turn);
+			// player[movingPlayer].turn = false;
+			// console.log("movingPlayer is " + movingPlayer + " and it is now " + player[movingPlayer].turn);
+			// player[otherPlayer].turn = true;
+			// console.log("otherPlayer is " + otherPlayer + " and it is now " + player[otherPlayer].turn);
 			io.to(connectedUsers[(connectedUsers.indexOf(socket.id)+1)%2]).emit("yourTurn",player);
+			//io.to(connectedUsers[(connectedUsers.indexOf(socket.id)+1)]).emit("endTurn", player);
 			// console.log(movingPlayer + " " + player[movingPlayer].turn + "  " + otherPlayer + " " + player[otherPlayer].turn);
 		}
 		else {

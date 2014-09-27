@@ -35,8 +35,9 @@
 			socket.on("disconnect", function() {
 				alert("The other user disconnected.");
 			});
-			socket.on("yourTurn", function() {
-				alert("yourTurn");
+			socket.on("yourTurn", function(serverPlayers) {
+				players = serverPlayers;
+				alert("yourTurn " + serverPlayers[name].turn);
 			});
 		});
 	</script>

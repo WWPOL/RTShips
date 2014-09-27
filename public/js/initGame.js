@@ -170,6 +170,15 @@ function initGame(name,socket) {
 	}
 
 	function actionOnClick () {
+		players[name].turn = false;
+		var otherPlayer;
+		if (name === "p1") {
+			otherPlayer = "p2";
+		}
+		else {
+			otherPlayer = "p1";
+		}
+		players[otherPlayer].turn = true;
 	    socket.emit('move', [name, players]);
 	}
 }
