@@ -50,6 +50,7 @@ function initGame(name) {
 			} else if (cursors.right.isDown) {
 				game.camera.x += 10;
 			}
+		}
 	}
 
 	function render() {
