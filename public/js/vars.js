@@ -6,4 +6,13 @@ var mouseY = 0;
 var tiles;
 var arrowkeys;
 var name = "";
-var players = {};
+var players = {
+	p1: {
+		turn: true,
+		ships: [];
+	};
+	p2: {
+		turn: false;
+		ships: [];
+	}
+};
