@@ -19,7 +19,17 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-var players = [];
+var players = {
+	p1: {
+		turn: true,
+		ships: []
+	},
+	p2: {
+		turn: false,
+		ships: []
+	}
+}
+
 var connectedUsers = []; //keep to two
 var gameStart = false;
 
@@ -29,6 +39,13 @@ io.on('connection', function(socket){
 	console.log("A user connected");
 	connectedUsers.push(socket.id);
 	console.log(connectedUsers);
+
+	if(connectedUsers.length == 1){
+		socket.emit('initIdentity', 'p1')
+	}
+	if(connectedUsers.length == 2){
+		socket.emit("initIdentity", 'p2');
+	}
 
 	if (connectedUsers.length > 2) {
 		console.log(connectedUsers.length + " users");
@@ -78,23 +95,23 @@ http.listen(3000, function(){
 	console.log("listening on port 3000");
 });
 
-function initialize() {
-	console.log("initialize()");
-	if (connectedUsers.length == 2) {
-		io.to(connectedUsers[0]).emit("initIdentity", "p1");
-		players.push({
-			id: "p1",
-			socket: connectedUsers[0],
-			turn: true,
-			ships: {}
-		});
-		io.to(connectedUsers[1]).emit("initIdentity", "p2");
-		players.push({
-			id: "p2",
-			socket: connectedUsers[1],
-			turn: false,
-			ships: {}
-		});
-	}
-	console.log(players);
-}
+// function initialize() {
+// 	console.log("initialize()");
+// 	if (connectedUsers.length == 2) {
+// 		io.to(connectedUsers[0]).emit("initIdentity", "p1");
+// 		players.push({
+// 			id: "p1",
+// 			socket: connectedUsers[0],
+// 			turn: true,
+// 			ships: {}
+// 		});
+// 		io.to(connectedUsers[1]).emit("initIdentity", "p2");
+// 		players.push({
+// 			id: "p2",
+// 			socket: connectedUsers[1],
+// 			turn: false,
+// 			ships: {}
+// 		});
+// 	}
+// 	console.log(players);
+// }
