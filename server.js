@@ -8,7 +8,7 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-var players = {}
+var player = {}
 
 var connectedUsers = []; //keep to two
 var gameStart = false;
@@ -51,9 +51,16 @@ io.on('connection', function(socket){
 	});
 	//////////////////////////
 
-	socket.on("move", function (ships) {
-		var movingPlayer = "p" + (connectedUsers.indexOf(socket.id)+1);
-		console.log(movingPlayer);
+	socket.on("move", function (sentPlayer) {
+		if (player[movingPlayer].turn) {
+			player = sentPlayer; //set server's version to one from client
+				var movingPlayer = "p" + (connectedUsers.indexOf(socket.id)+1);
+				var otherPlayer = "p" + ((connectedUsers.indexOf(socket.id)+1)%2+1); //other player
+				console.log(movingPlayer + " " + otherPlayer);
+			player[movingPlayer].turn = false;
+			player[otherPlayer].turn = true;
+			io.to(connectedUsers[(connectedUsers.indexOf(socket.id)+1)%2]).emit("yourTurn",player);
+		}
 	});
 
 });
