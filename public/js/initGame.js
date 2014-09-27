@@ -38,15 +38,17 @@ function initGame(name) {
 	}
 
 	function update() {
-		if (cursors.up.isDown) {
-			game.camera.y -= 10;
-		} else if (cursors.down.isDown) {
-			game.camera.y += 10;
-		}
-		if (cursors.left.isDown) {
-			game.camera.x -= 10;
-		} else if (cursors.right.isDown) {
-			game.camera.x += 10;
+		if(players[name].turn){
+			if (cursors.up.isDown) {
+				game.camera.y -= 10;
+			} else if (cursors.down.isDown) {
+				game.camera.y += 10;
+			}
+			if (cursors.left.isDown) {
+				game.camera.x -= 10;
+			} else if (cursors.right.isDown) {
+				game.camera.x += 10;
+			}
 		}
 	}
 
