@@ -48,8 +48,8 @@ io.on('connection', function(socket){
 	if (connectedUsers.length == 2) {
 		console.log("game start");
 		gameStart = true;
-		io.emit("initGame");
 		//initialize();
+		io.emit("initGame", players);
 	}
 
 	socket.on('disconnect', function(){
