@@ -29,7 +29,7 @@
 			socket.on('initGame', function(players){
 				alert("Initializing game!");
 				players = players;
-				initGame(name);
+				initGame(name, players);
 				running = true;
 			});
 			socket.on('full', function(){

@@ -1,4 +1,4 @@
-function initGame(name) {
+function initGame(name,players) {
 	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.CANVAS,'rtships',{preload: preload, create: create, update: update, render: render});
 
 	function preload() {
@@ -39,7 +39,6 @@ function initGame(name) {
 	}
 
 	function update() {
-		console.log(players);
 		if(players[name].turn){
 			if (cursors.up.isDown) {
 				game.camera.y -= 10;
