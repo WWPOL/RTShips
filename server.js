@@ -8,7 +8,17 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-var player = {}
+var player = {
+	p1: {
+		turn: true,
+		ships: []
+	},
+	p2: {
+		turn: false,
+		ships: []
+	}
+
+}
 
 var connectedUsers = []; //keep to two
 var gameStart = false;
@@ -51,15 +61,28 @@ io.on('connection', function(socket){
 	});
 	//////////////////////////
 
-	socket.on("move", function (sentPlayer) {
+	socket.on("move", function (clientInfo) {
+		var movingPlayer = clientInfo[0]; //p1 or p2
+		var otherPlayer;
+		if (movingPlayer === "p1") {
+			otherPlayer = "p2";
+		}
+		else {
+			otherPlayer = "p1";
+		}
+		
 		if (player[movingPlayer].turn) {
-			player = sentPlayer; //set server's version to one from client
-				var movingPlayer = "p" + (connectedUsers.indexOf(socket.id)+1);
-				var otherPlayer = "p" + ((connectedUsers.indexOf(socket.id)+1)%2+1); //other player
-				console.log(movingPlayer + " " + otherPlayer);
+			player = clientInfo[1]; //player object
+			// console.log(movingPlayer + " " + otherPlayer);
 			player[movingPlayer].turn = false;
+			console.log("movingPlayer is " + movingPlayer + " and it is now " + player[movingPlayer].turn);
 			player[otherPlayer].turn = true;
+			console.log("otherPlayer is " + otherPlayer + " and it is now " + player[otherPlayer].turn);
 			io.to(connectedUsers[(connectedUsers.indexOf(socket.id)+1)%2]).emit("yourTurn",player);
+			// console.log(movingPlayer + " " + player[movingPlayer].turn + "  " + otherPlayer + " " + player[otherPlayer].turn);
+		}
+		else {
+			console.log(clientInfo[1]);
 		}
 	});
 
