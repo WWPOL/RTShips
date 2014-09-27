@@ -35,6 +35,7 @@ function initGame(name) {
 		tiles = game.add.tileSprite(0,0,3000,3000, 'water');
 
 		cursors = game.input.keyboard.createCursorKeys();
+		
 	}
 
 	function update() {
@@ -53,5 +54,14 @@ function initGame(name) {
 	}
 
 	function render() {
+		if(name == "p1"){
+			players[name].ships.forEach(function(ship)){
+
+			}
+		}else{
+			players[p2].ships.forEach(function(ship)){
+				
+			}
+		}
 	}
 }
