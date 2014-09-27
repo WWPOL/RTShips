@@ -26,7 +26,7 @@
 			});
 			socket.on('initGame', function(){
 				alert("Initializing game!");
-				initGame(name, players, socket);
+				initGame(name, socket);
 				running = true;
 			});
 			socket.on('full', function(){

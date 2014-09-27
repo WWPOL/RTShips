@@ -1,4 +1,4 @@
-function initGame(name,players,socket) {
+function initGame(name,socket) {
 	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.CANVAS,'rtships',{preload: preload, create: create, update: update, render: render});
 	var socket = socket;
 	var selected = null;
@@ -58,21 +58,29 @@ function initGame(name,players,socket) {
 				var p1Battleship = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redbattleship');
 				p1Battleship.anchor.setTo(1.0, 1.0);
 				p1Battleship.scale.y = -1;
+				p1Battleship.inputEnabled = true;
+			    p1Battleship.events.onInputDown.add(move, this);
 				p1Sprites.push(p1Battleship);
 			}else if(players.p1.ships[i].type == 'destroyer'){
 				var p1Destroyer = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'reddestroyer');
 				p1Destroyer.anchor.setTo(1.0, 1.0);
 				p1Destroyer.scale.y = -1;
+				p1Destroyer.inputEnabled = true;
+			    p1Destroyer.events.onInputDown.add(move, this);
 				p1Sprites.push(p1Destroyer);
 			}else if(players.p1.ships[i].type == 'scout'){
 				var p1Scout = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redscout');
 				p1Scout.anchor.setTo(1.0, 1.0);
 				p1Scout.scale.y = -1;
+				p1Scout.inputEnabled = true;
+			    p1Scout.events.onInputDown.add(move, this);
 				p1Sprites.push(p1Scout);
 			}else if(players.p1.ships[i].type == 'sub'){
 				var p1Sub = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redsub');
 				p1Sub.anchor.setTo(1.0, 1.0);
 				p1Sub.scale.y = -1;
+				p1Sub.inputEnabled = true;
+			    p1Sub.events.onInputDown.add(move, this);
 				p1Sprites.push(p1Sub);
 			}
 		}
@@ -104,10 +112,10 @@ function initGame(name,players,socket) {
 	    button.fixedToCamera = true;
 
 	    if (name === "p1") {
-	    	game.camera.x = 2000;
+	    	game.camera.x = 1800;
 	    	game.camera.y = 0;
 	    } else if (name === "p2") {
-	    	game.camera.x = 2000;
+	    	game.camera.x = 1800;
 	    	game.camera.y = 5000;
 	    }
 	}
@@ -128,33 +136,6 @@ function initGame(name,players,socket) {
 		} else if (cursors.right.isDown) {
 			game.camera.x += 10;
 		}
-		if(game.input.mousePointer.isDown){
-			if(players[name].turn){
-				var xClick = Math.floor(game.input.mousePointer.x/100)*100;
-				var yClick = Math.floor(game.input.mousePointer.y/100)*100;
-				if(selected === null){
-					if(name === "p1"){
-						p1Sprites.forEach(function(sprite){
-							if(sprite.x === xClick && sprite.y === yClick){
-								selected = sprite;
-							};
-						});
-					}
-					if(name === "p2"){
-						p2Sprites.forEach(function(sprite){
-							if(sprite.x === xClick && sprite.y === yClick){
-								selected = sprite;
-							};
-						});
-					}
-				}else{
-					selected.x = xClick;
-					selected.y = yClick;
-					selected = null;
-					console.log(selected);
-				}
-			}
-		}
 	}
 
 	function render() {
@@ -164,6 +145,28 @@ function initGame(name,players,socket) {
 		players.p2.ships.forEach(function(ship){
 
 		});
+	}
+
+	function move(sprite) {
+		console.log("start");
+		if(players[name].turn){
+			console.log(game.input.mousePointer.x);
+			console.log(game.input.mousePointer.y);
+			var xClick = Math.floor(game.input.mousePointer.x/100)*100;
+			var yClick = Math.floor(game.input.mousePointer.y/100)*100;
+			console.log(xClick);
+			console.log(yClick);
+			if(selected === null){
+				console.log("no selected")
+				selected = sprite;
+			}else{
+				selected.x = xClick;
+				selected.y = yClick;
+				selected = null;
+				console.log("sprite is at (" + selected.x + ", " + selected.y + ")");
+				console.log(p1Sprites);
+			}
+		}
 	}
 
 	function actionOnClick () {
