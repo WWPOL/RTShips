@@ -8,6 +8,7 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
+var players = {};
 var connectedUsers = []; //keep to two
 
 io.on('connection', function(socket){
