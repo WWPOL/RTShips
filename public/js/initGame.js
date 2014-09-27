@@ -55,18 +55,24 @@ function initGame(name,players,socket) {
 		cursors = game.input.keyboard.createCursorKeys();
 		for(var i = 0; i < players.p1.ships.length; i++){
 			if(players.p1.ships[i].type =='battleship'){
-				var p1Battleship = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redbattleship');
+				var p1Battleship = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redbattleship');
 				p1Battleship.anchor.setTo(1.0, 1.0);
 				p1Battleship.scale.y = -1;
 				p1Sprites.push(p1Battleship);
 			}else if(players.p1.ships[i].type == 'destroyer'){
-				var p1Destroyer = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'reddestroyer');
+				var p1Destroyer = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'reddestroyer');
+				p1Destroyer.anchor.setTo(1.0, 1.0);
+				p1Destroyer.scale.y = -1;
 				p1Sprites.push(p1Destroyer);
 			}else if(players.p1.ships[i].type == 'scout'){
-				var p1Scout = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redscout');
+				var p1Scout = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redscout');
+				p1Scout.anchor.setTo(1.0, 1.0);
+				p1Scout.scale.y = -1;
 				p1Sprites.push(p1Scout);
 			}else if(players.p1.ships[i].type == 'sub'){
-				var p1Sub = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redsub');
+				var p1Sub = game.add.sprite((players.p1.ships[i].x + 1)*100, players.p1.ships[i].y*100, 'redsub');
+				p1Sub.anchor.setTo(1.0, 1.0);
+				p1Sub.scale.y = -1;
 				p1Sprites.push(p1Sub);
 			}
 		}
@@ -92,6 +98,11 @@ function initGame(name,players,socket) {
 
 	    button = game.add.button(clientWidth - 200, clientHeight - 100, 'button', actionOnClick, this, 2, 1, 0);
 	    button.fixedToCamera = true;
+
+	    if (name === "p2") {
+	    	game.camera.x = 5000;
+	    	game.camera.y = 5000;
+	    }
 	}
 
 	function update() {
