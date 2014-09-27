@@ -56,13 +56,13 @@ function initGame(name) {
 
 	function render() {
 		if(name == "p1"){
-			players[name].ships.forEach(function(ship)){
+			players[name].ships.forEach(function(ship){
 
-			}
+			});
 		}else{
-			players[p2].ships.forEach(function(ship)){
-				
-			}
+			players[p2].ships.forEach(function(ship){
+
+			});				
 		}
 	}
 }
