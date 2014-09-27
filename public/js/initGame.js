@@ -1,5 +1,6 @@
-function initGame(name,players) {
+function initGame(name,players,socket) {
 	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.CANVAS,'rtships',{preload: preload, create: create, update: update, render: render});
+	var socket = socket;
 
 	function preload() {
 		game.load.image('blueaircraftcarrier','assets/ships/blueaircraftcarrier.png');
@@ -23,6 +24,8 @@ function initGame(name,players) {
 
 		game.load.audio('explosionsnd','assets/sounds/explosion.wav');
 		game.load.audio('shoot', 'assets/sounds/shoot.wav');
+
+		game.load.spritesheet('button', 'assets/button_sprite_sheet.png', 193, 71);
 	}
 
 	var cursors;
@@ -66,6 +69,8 @@ function initGame(name,players) {
 	    });
 	    turnnote.fixedToCamera = true;
 	    turnnote.anchor.setTo(0.5, 0.5);
+
+	    button = game.add.button(clientWidth - 200, clientHeight - 100, 'button', actionOnClick, this, 2, 1, 0);
 	}
 
 	function update() {
@@ -95,5 +100,9 @@ function initGame(name,players) {
 		players.p2.ships.forEach(function(ship){
 
 		});
+	}
+
+	function actionOnClick () {
+	    socket.emit('move', players);
 	}
 }
