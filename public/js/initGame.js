@@ -40,12 +40,9 @@ function initGame(name,players,socket) {
 		for (var x = 0; x < 30; x++) {
 			for (var y = 0; y < 30; y++) {
 				var tile = game.add.sprite(x * 100, y * 100, 'water');
-				console.log("X is " + x*100);
-				console.log("Y is " + y*100);
 				tiles.push(tile);
 			}
 		}
-		console.log(tiles);
 
 		cursors = game.input.keyboard.createCursorKeys();
 		for(var i = 0; i < players.p1.ships.length; i++){
@@ -119,6 +116,6 @@ function initGame(name,players,socket) {
 	}
 
 	function actionOnClick () {
-	    socket.emit('move', players);
+	    socket.emit('move', [name, players]);
 	}
 }
