@@ -3,6 +3,17 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var data = {
+	p1: {
+		score: 0,
+		ships: []
+	},
+	p2: {
+		score: 0,
+		ships: []
+	}
+}
+
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
@@ -21,11 +32,11 @@ io.on('connection', function(socket){
 		io.to(socket.id).emit("full");
 	}
 
-	if (connectedUsers.length > 2) {
+	if (connectedUsers.length < 2) {
 		io.emit("waitForJoin");
 	}
 
-	if (connectedUsers.length == 1) {
+	if (connectedUsers.length == 2) {
 		console.log("game start");
 		io.emit("initGame");
 	}
