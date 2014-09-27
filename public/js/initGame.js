@@ -30,6 +30,9 @@ function initGame(name,players,socket) {
 
 	var cursors;
 	var turnnote;
+	var moving = false;
+	var movex = 0;
+	var movey = 0;
 
 	function create() {
 		game.world.setBounds(0,0,3000,3000);
@@ -39,7 +42,8 @@ function initGame(name,players,socket) {
 		
 		for (var x = 0; x < 30; x++) {
 			for (var y = 0; y < 30; y++) {
-				var tile = game.add.sprite(x * 100, y * 100, 'water');
+				//var tile = game.add.sprite(x * 100, y * 100, 'water');
+				var tile = game.add.button(x * 100, y * 100, 'water', moveShip(this.x,this.y), this);
 				tiles.push(tile);
 			}
 		}
@@ -48,20 +52,20 @@ function initGame(name,players,socket) {
 		for(var i = 0; i < players.p1.ships.length; i++){
 			if(players.p1.ships[i].type =='battleship'){
 				var p1Battleship = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redbattleship');
-				p1Battleship.anchor.setTo(1.0, 0.5);
+				p1Battleship.anchor.setTo(1.0, 1.0);
 				p1Battleship.scale.y = -1;
 			}else if(players.p1.ships[i].type == 'destroyer'){
 				var p1Destroyer = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'reddestroyer');
-				p1Destroyer.anchor.setTo(1.0, 0.5);
+				p1Destroyer.anchor.setTo(1.0, 1.0);
 				p1Destroyer.scale.y = -1;
 			}else if(players.p1.ships[i].type == 'scout'){
 				var p1Scout = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redscout');
-				p1Scout.anchor.setTo(1.0, 0.5);
+				p1Scout.anchor.setTo(1.0, 1.0);
 				p1Scout.scale.y = -1;;
 			}else if(players.p1.ships[i].type == 'sub'){
 				var p1Sub = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redsub');
-				p1Scout.anchor.setTo(1.0, 0.5);
-				p1Scout.scale.y = -1;
+				p1Sub.anchor.setTo(1.0, 1.0);
+				p1Sub.scale.y = -1;
 			}
 		}
 		for(var i = 0; i < players.p2.ships.length; i++){
@@ -89,6 +93,9 @@ function initGame(name,players,socket) {
 	}
 
 	function update() {
+		while (moving) {
+
+		}
 		if (players[name].turn){
 			turnnote.setText("");
 		} else {
@@ -117,5 +124,11 @@ function initGame(name,players,socket) {
 
 	function actionOnClick () {
 	    socket.emit('move', [name, players]);
+	}
+
+	function moveShip(x,y) {
+		moving = true;
+		movex = x;
+		movey = y;
 	}
 }
