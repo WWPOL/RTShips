@@ -17,8 +17,7 @@
 	<canvas id="game"></canvas>
 	<script>
 		var socket = io();
-		var name;
-		var players = {};
+		var running = false;
 		$(document).ready(function(){
 			socket.on("waitForJoin", function () {
 				alert("Waiting for another player to join!");
@@ -27,10 +26,11 @@
 				name = identity;
 				alert(identity);
 			});
-			socket.on('initGame', function(player){
+			socket.on('initGame', function(players){
 				alert("Initializing game!");
-				players = player;
+				players = players;
 				initGame(name);
+				running = true;
 			});
 			socket.on('full', function(){
 				alert("Server is full. Please come again");
@@ -41,10 +41,12 @@
 			socket.on("yourTurn", function() {
 				alert("yourTurn");
 			});
-			if (players[name].isTurn) {
-				$("#paused").css("display", "none");
-			} else {
-				$("#paused").css("display", "block");
+			if (running) {
+				if (players[name].turn) {
+					$("#paused").css("display", "none");
+				} else if (!players[name].turn) {
+					$("#paused").css("display", "block");
+				}
 			}
 		});
 	</script>

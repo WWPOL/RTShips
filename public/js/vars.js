@@ -5,3 +5,5 @@ var mouseX = 0;
 var mouseY = 0;
 var tiles;
 var arrowkeys;
+var name = "";
+var players = {};

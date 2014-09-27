@@ -38,6 +38,7 @@ function initGame(name) {
 	}
 
 	function update() {
+		console.log(players);
 		if(players[name].turn){
 			if (cursors.up.isDown) {
 				game.camera.y -= 10;
@@ -49,7 +50,6 @@ function initGame(name) {
 			} else if (cursors.right.isDown) {
 				game.camera.x += 10;
 			}
-		}
 	}
 
 	function render() {
