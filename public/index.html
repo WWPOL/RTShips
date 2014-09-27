@@ -16,15 +16,19 @@
 		var socket = io();
 		var name;
 		$(document).ready(function(){
+			socket.on("waitForJoin", function () {
+				alert("Waiting for another player to join");
+			});
 			socket.on('initIdentity', function(identity){
 				name = identity;
 			});
 			socket.on('initGame', function(){
+				alert("Initializing game!");
 				initGame(name);
 			});
 			socket.on('full', function(){
 				alert("Server is full. Please come again");
-			})
+			});
 		});
 	</script>
 	
