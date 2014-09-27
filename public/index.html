@@ -8,6 +8,7 @@
 	<script src="js/tile.js"></script>
 	<script src="js/vars.js"></script>
 	<script src="js/initGame.js"></script>
+	
 </head>
 
 <body>
@@ -16,6 +17,12 @@
 	<script>
 		//var socket = io();
 		var running = false;
+		var mouseX;
+		var mouseY;
+		var mouseDown = false;
+
+		initGame();
+
 		$(document).ready(function(){
 			initGame();
 			/*socket.on("waitForJoin", function () {

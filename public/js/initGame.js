@@ -13,6 +13,19 @@ function initGame(){
 		}
 	}
 
+	gcanvas.addEventListener("mousemove", function (e) {
+		var rect = gcanvas.getBoundingClientRect();
+		mouseX = e.clientX - rect.left;
+		mouseY = e.clientY - rect.top;
+	}, false);
+
+	gcanvas.addEventListener('mousedown', function (e) {
+		mousedown = true; // Starts the firing if statement
+	}, false);
+	gcanvas.addEventListener('mouseup', function (e) {
+		mousedown = false;
+	}, false);
+
 	var main = function(){
 		var now = Date.now();
 		var delta = now - then;
