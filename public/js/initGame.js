@@ -4,18 +4,6 @@ function initGame(){
 	gcanvas.width = clientWidth;
 	gcanvas.height = clientHeight;
 
-	var players = {
-		p1: {
-			turn: true,
-			ships: [new Ship(130,0,"battleship","red"), new Ship(140,0,"destroyer","red"), new Ship(150, 0, "scout","red"), new Ship(160,0,"sub","red")]
-		},
-		p2: {
-			turn: false,
-			ships: [new Ship(130, 270,"battleship","blue"), new Ship(140, 280,"destroyer","blue"), new Ship(150, 290, "scout","blue"), new Ship(160, 290,"sub","blue")]
-		}
-	};
-
-
 	var tiles = [];
 
 	var ship = new Ship(50,50,"battleship","red");
