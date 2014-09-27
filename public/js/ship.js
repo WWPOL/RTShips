@@ -9,27 +9,32 @@ Ship = function(x,y,type,color) {
 		this.speed = 1
 		this.damage = 5
 		this.health = 15
-		this.sprite = new Image('assets/ships/' + color + "battleship.png");
+		this.sprite = new Image();
+		this.sprite.src = 'assets/ships/' + color + "battleship.png";
 	} else if (this.type === "destroyer") {
 		this.sight = 4
 		this.speed = 2
 		this.damage = 3
 		this.health = 10
-		this.sprite = new Image('assets/ships/' + color + "destroyer.png");
+		this.sprite = new Image();
+		this.sprite.src = 'assets/ships/' + color + "destroyer.png";
 	} else if (this.type === "scout") {
 		this.sight = 4
 		this.speed = 3
 		this.damage = 1
 		this.health = 5
-		this.sprite = new Image('assets/ships/' + color + "scout.png");
+		this.sprite = new Image();
+		this.sprite.src = 'assets/ships/' + color + "scout.png";
 	} else if (this.type === "sub") {
 		this.sight = 3
 		this.speed = 2
 		this.damage = 3
 		this.health = 1
-		this.sprite = new Image('assets/ships/' + color + "sub.png");
+		this.sprite = new Image();
+		this.sprite.src = 'assets/ships/' + color + "sub.png";
 	}
 }
+
 
 Ship.prototype.updateXY = function(x, y) {
 	this.x = x;

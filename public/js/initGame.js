@@ -5,6 +5,7 @@ function initGame(){
 	gcanvas.height = clientHeight;
 	var tiles = [];
 
+	var ship = new Ship(50,50,"battleship","red");
 
 	for (var x = 0; x < gcanvas.width/50;x++) {
 		for (var y = 0; y < gcanvas.height/50;y++) {
@@ -42,11 +43,14 @@ function initGame(){
 		tiles.forEach(function(tile){
 			tile.update();
 		})
+		ship.updateXY(ship.x + 3, ship.y + 3);
+		ship.updateHealth(0);
 	};
 	var render = function(){
 		tiles.forEach(function(tile){
 			tile.draw(gctx);
 		})
+		ship.draw(gctx);
 	};
 	var then = Date.now();
 	main();
