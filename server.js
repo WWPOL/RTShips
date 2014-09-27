@@ -60,7 +60,6 @@ io.on('connection', function(socket){
 		console.log("game start");
 		gameStart = true;
 		io.emit("initGame");
-		initialize();
 	}
 
 	socket.on('disconnect', function(){
