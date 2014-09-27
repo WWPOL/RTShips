@@ -36,19 +36,35 @@ function initGame(name,players,socket) {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.stage.smoothed = false;
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-		tiles = game.add.tileSprite(0,0,3000,3000, 'water');
+		
+		for (var x = 0; x < 30; x++) {
+			for (var y = 0; y < 30; y++) {
+				var tile = game.add.sprite(x * 100, y * 100, 'water');
+				console.log("X is " + x*100);
+				console.log("Y is " + y*100);
+				tiles.push(tile);
+			}
+		}
+		console.log(tiles);
 
 		cursors = game.input.keyboard.createCursorKeys();
 		for(var i = 0; i < players.p1.ships.length; i++){
 			if(players.p1.ships[i].type =='battleship'){
 				var p1Battleship = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redbattleship');
+				p1Battleship.anchor.setTo(1.0, 0.5);
+				p1Battleship.scale.y = -1;
 			}else if(players.p1.ships[i].type == 'destroyer'){
 				var p1Destroyer = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'reddestroyer');
-				console.log("Ship added");
+				p1Destroyer.anchor.setTo(1.0, 0.5);
+				p1Destroyer.scale.y = -1;
 			}else if(players.p1.ships[i].type == 'scout'){
 				var p1Scout = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redscout');
+				p1Scout.anchor.setTo(1.0, 0.5);
+				p1Scout.scale.y = -1;;
 			}else if(players.p1.ships[i].type == 'sub'){
 				var p1Sub = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redsub');
+				p1Scout.anchor.setTo(1.0, 0.5);
+				p1Scout.scale.y = -1;
 			}
 		}
 		for(var i = 0; i < players.p2.ships.length; i++){
@@ -72,6 +88,7 @@ function initGame(name,players,socket) {
 	    turnnote.anchor.setTo(0.5, 0.5);
 
 	    button = game.add.button(clientWidth - 200, clientHeight - 100, 'button', actionOnClick, this, 2, 1, 0);
+	    button.fixedToCamera = true;
 	}
 
 	function update() {

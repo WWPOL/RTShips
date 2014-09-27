@@ -3,7 +3,7 @@ var clientWidth = document.documentElement.clientWidth;
 var clientHeight = document.documentElement.clientHeight;
 var mouseX = 0;
 var mouseY = 0;
-var tiles;
+var tiles = [];
 var arrowkeys;
 var name = "";
 var players = {
