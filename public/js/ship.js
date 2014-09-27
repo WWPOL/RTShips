@@ -27,7 +27,7 @@ Ship = function(x,y,type) {
 	}
 }
 
-Ship.prototype.updateXY(x, y) {
+Ship.prototype.updateXY = function(x, y) {
 	this.x = x;
 	this.y = y;
 };
