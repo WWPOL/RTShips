@@ -39,7 +39,6 @@ function initGame(name,players,socket) {
 		tiles = game.add.tileSprite(0,0,3000,3000, 'water');
 
 		cursors = game.input.keyboard.createCursorKeys();
-		console.log(players.p1.ships[0].type);
 		for(var i = 0; i < players.p1.ships.length; i++){
 			if(players.p1.ships[i].type =='battleship'){
 				var p1Battleship = game.add.sprite(players.p1.ships[i].x*100, players.p1.ships[i].y*100, 'redbattleship');
