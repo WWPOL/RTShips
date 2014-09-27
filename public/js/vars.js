@@ -13,6 +13,6 @@ var players = {
 	},
 	p2: {
 		turn: false,
-		ships: [new Ship(13, 37,"battleship"), new Ship(14, 38,"destroyer"), new Ship(15, 39, "scout"), new Ship(16, 39,"sub")]
+		ships: [new Ship(13, 27,"battleship"), new Ship(14, 28,"destroyer"), new Ship(15, 29, "scout"), new Ship(16, 29,"sub")]
 	}
 };

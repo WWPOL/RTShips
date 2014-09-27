@@ -103,16 +103,16 @@ function initGame(name,players,socket) {
 	    button = game.add.button(clientWidth - 200, clientHeight - 100, 'button', actionOnClick, this, 2, 1, 0);
 	    button.fixedToCamera = true;
 
-	    if (name === "p2") {
-	    	game.camera.x = 5000;
+	    if (name === "p1") {
+	    	game.camera.x = 2000;
+	    	game.camera.y = 0;
+	    } else if (name === "p2") {
+	    	game.camera.x = 2000;
 	    	game.camera.y = 5000;
 	    }
 	}
 
 	function update() {
-		while (moving) {
-
-		}
 		if (players[name].turn){
 			turnnote.setText("");
 		} else {
@@ -132,7 +132,6 @@ function initGame(name,players,socket) {
 			if(players[name].turn){
 				var xClick = Math.floor(game.input.mousePointer.x/100)*100;
 				var yClick = Math.floor(game.input.mousePointer.y/100)*100;
-				console.log(xClick + " " + yClick);
 				if(selected === null){
 					if(name === "p1"){
 						p1Sprites.forEach(function(sprite){
@@ -151,6 +150,7 @@ function initGame(name,players,socket) {
 				}else{
 					selected.x = xClick;
 					selected.y = yClick;
+					selected = null;
 					console.log(selected);
 				}
 			}
