@@ -26,6 +26,7 @@ function initGame(name,players) {
 	}
 
 	var cursors;
+	var turnnote;
 
 	function create() {
 		game.world.setBounds(0,0,3000,3000);
@@ -57,20 +58,33 @@ function initGame(name,players) {
 				var p2Sub = game.add.sprite(players.p2.ships[i].x*100, players.p2.ships[i].y*100, 'bluesub');
 			}
 		}
+
+		turnnote = game.add.text(clientWidth / 2, 40, "It is not your turn!", {
+	        font: "65px Arial",
+	        fill: "#ff0044",
+	        align: "center"
+	    });
+	    turnnote.fixedToCamera = true;
+	    turnnote.anchor.setTo(0.5, 0.5);
 	}
 
 	function update() {
-		if(players[name].turn){
-			if (cursors.up.isDown) {
-				game.camera.y -= 10;
-			} else if (cursors.down.isDown) {
-				game.camera.y += 10;
-			}
-			if (cursors.left.isDown) {
-				game.camera.x -= 10;
-			} else if (cursors.right.isDown) {
-				game.camera.x += 10;
-			}
+		if (players[name].turn){
+			turnnote.setText("");
+			console.log(players[name].turn)
+		} else {
+			turnnote.setText("It is not your turn!");
+			console.log(players[name].turn)
+		}
+		if (cursors.up.isDown) {
+			game.camera.y -= 10;
+		} else if (cursors.down.isDown) {
+			game.camera.y += 10;
+		}
+		if (cursors.left.isDown) {
+			game.camera.x -= 10;
+		} else if (cursors.right.isDown) {
+			game.camera.x += 10;
 		}
 	}
 
