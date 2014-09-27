@@ -1,9 +1,11 @@
 function initGame(){
-	var gcanvas = document.createElement('game');
-	var gctx = gcanvas.getContext('2d');
 	var main = function(){
 		var now = Date.now();
 		var delta = now - then;
+
+		update(delta/1000);
+		render();
+
 		then = now;
 		requestAnimationFrame(main);
 	};
@@ -11,8 +13,11 @@ function initGame(){
 
 	};
 	var render = function(){
-		for(var i = 0; i < 50; i++){
-			gctx.drawImage("public/assets/tiles/water.png")
+		for(var y = 0; y < 20; i++){
+			for(var x = 0; x < 20; i++){
+				console.log("drawing");
+				gctx.drawImage("public/assets/tiles/water.png",x*25,y*25,25,25);
+			}
 		};
 	};
 	var then = Date.now();
