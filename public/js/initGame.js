@@ -1,5 +1,5 @@
 function initGame(name) {
-	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.Auto,'rtships',{preload: preload, create: create, update: update, render: render});
+	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.CANVAS,'rtships',{preload: preload, create: create, update: update, render: render});
 
 	function preload() {
 		game.load.image('blueaircraftcarrier','assets/ships/blueaircraftcarrier.png');
@@ -26,36 +26,43 @@ function initGame(name) {
 		game.load.audio('shoot', 'assets/sounds/shoot.wav');
 	}
 
+	var cursors;
+	var offsetX = 0;
+	var offsetY = 0;
+
 	function create() {
 		game.world.setBounds(0,0,5000,5000);
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.stage.smoothed = false;
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-		tiles = game.add.tileSprite(0,0,clientWidth,clientHeight, 'water');
-		tiles.fixedToCamera = true;
+		tiles = game.add.tileSprite(0,0,5000,5000, 'water');
+		//tiles.fixedToCamera = true;
 		cursor = game.add.sprite(clientWidth/2,clientHeight/2,'cursor');
-			game.physics.arcade.enable(cursor);
-			game.camera.follow(cursor);
+			//game.physics.arcade.enable(cursor);
+			//game.camera.follow(cursor);
 
-		arrowkeys = game.input.keyboard.createCursorKeys();
+		cursors = game.input.keyboard.createCursorKeys();
 	}
 
 	function update() {
-		cursor.x = game.input.mousePointer.x;
-		cursor.y = game.input.mousePointer.y;
-		if (arrowkeys.up.isDown) {
+		cursor.x = game.input.mousePointer.x + offsetX;
+		cursor.y = game.input.mousePointer.y + offsetY;
+		if (cursors.up.isDown) {
 			game.camera.y -= 5;
-		} else if (arrowkeys.down.isDown) {
+			offsetY -= 5;
+		} else if (cursors.down.isDown) {
 			game.camera.y += 5;
+			offsetY += 5;
 		}
-		if (arrowkeys.left.isDown) {
+		if (cursors.left.isDown) {
 			game.camera.x -= 5;
-		} else if (arrowkeys.right.isDown) {
+			offsetX -= 5;
+		} else if (cursors.right.isDown) {
 			game.camera.x += 5;
+			offsetX += 5;
 		}
 	}
 
 	function render() {
-		game.debug.cameraInfo(game.camera, 32,32);
 	}
 }
