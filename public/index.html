@@ -26,7 +26,7 @@
 			});
 			socket.on('initGame', function(){
 				alert("Initializing game!");
-				initGame(name, players, socket);
+				initGame(name, socket);
 				running = true;
 			});
 			socket.on('full', function(){
@@ -35,8 +35,9 @@
 			socket.on("disconnect", function() {
 				alert("The other user disconnected.");
 			});
-			socket.on("yourTurn", function() {
-				alert("yourTurn");
+			socket.on("yourTurn", function(serverPlayers) {
+				players = serverPlayers;
+				alert("yourTurn " + serverPlayers[name].turn);
 			});
 		});
 	</script>

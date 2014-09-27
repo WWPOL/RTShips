@@ -1,4 +1,4 @@
-function initGame(name,players,socket) {
+function initGame(name,socket) {
 	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.CANVAS,'rtships',{preload: preload, create: create, update: update, render: render});
 	var socket = socket;
 	var selected = null;
@@ -167,6 +167,15 @@ function initGame(name,players,socket) {
 	}
 
 	function actionOnClick () {
+		players[name].turn = false;
+		var otherPlayer;
+		if (name === "p1") {
+			otherPlayer = "p2";
+		}
+		else {
+			otherPlayer = "p1";
+		}
+		players[otherPlayer].turn = true;
 	    socket.emit('move', [name, players]);
 	}
 }
