@@ -36,10 +36,7 @@ function initGame(name) {
 		game.stage.smoothed = false;
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 		tiles = game.add.tileSprite(0,0,5000,5000, 'water');
-		//tiles.fixedToCamera = true;
 		cursor = game.add.sprite(clientWidth/2,clientHeight/2,'cursor');
-			//game.physics.arcade.enable(cursor);
-			//game.camera.follow(cursor);
 
 		cursors = game.input.keyboard.createCursorKeys();
 	}
@@ -48,18 +45,18 @@ function initGame(name) {
 		cursor.x = game.input.mousePointer.x + offsetX;
 		cursor.y = game.input.mousePointer.y + offsetY;
 		if (cursors.up.isDown) {
-			game.camera.y -= 5;
-			offsetY -= 5;
+			game.camera.y -= 10;
+			offsetY -= 10;
 		} else if (cursors.down.isDown) {
-			game.camera.y += 5;
-			offsetY += 5;
+			game.camera.y += 10;
+			offsetY += 10;
 		}
 		if (cursors.left.isDown) {
-			game.camera.x -= 5;
-			offsetX -= 5;
+			game.camera.x -= 10;
+			offsetX -= 10;
 		} else if (cursors.right.isDown) {
-			game.camera.x += 5;
-			offsetX += 5;
+			game.camera.x += 10;
+			offsetX += 10;
 		}
 	}
 
