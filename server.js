@@ -8,12 +8,28 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
+var connectedUsers = []; //keep to two
+
 io.on('connection', function(socket){
 	console.log("A user connected");
+	connectedUsers.push(socket.id);
+	console.log(connectedUsers);
+
+	if (connectedUsers.length > 2) {
+		console.log(connectedUsers.length + " users");
+		io.to(socket.id).emit("full");
+	}
+
+	if (connectedUsers.length == 2) {
+		console.log("game start");
+		io.emit("initgame");
+	}
 
 	socket.on('disconnect', function(){
+		connectedUsers.splice(connectedUsers.indexOf(socket.id));
 		console.log("A user disconnected");
-	})
+		console.log(connectedUsers);
+	});
 });
 
 http.listen(3000, function(){
