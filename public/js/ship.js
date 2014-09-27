@@ -55,6 +55,6 @@ Ship.prototype.draw = function(ctx) {
 		} else if (this.type === "sub") {
 			ctx.drawImage(this.sprite,0,0, 50, 50)
 		}
-		ctx.restore;
+		ctx.restore();
 	}
 }
