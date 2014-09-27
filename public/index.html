@@ -21,6 +21,7 @@
 			});
 			socket.on('initIdentity', function(identity){
 				name = identity;
+				alert(identity);
 			});
 			socket.on('initGame', function(){
 				alert("Initializing game!");
@@ -28,6 +29,12 @@
 			});
 			socket.on('full', function(){
 				alert("Server is full. Please come again");
+			});
+			socket.on("disconnect", function() {
+				alert("The other user disconnected.");
+			});
+			socket.on("yourTurn", function() {
+				alert("yourTurn");
 			});
 		});
 	</script>
