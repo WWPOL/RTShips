@@ -1,19 +1,35 @@
 function initGame(){
-	var gcanvas = document.createElement('game');
+	var gcanvas = document.getElementById('game');
 	var gctx = gcanvas.getContext('2d');
+	gcanvas.width = clientWidth;
+	gcanvas.height = clientHeight;
+	var tiles = [];
+
+
+	for (var x = 0; x < gcanvas.width/50;x++) {
+		for (var y = 0; y < gcanvas.height/50;y++) {
+			var tile = new Tile(x*50,y*50,"water");
+			tiles.push(tile);
+		}
+	}
+
 	var main = function(){
 		var now = Date.now();
 		var delta = now - then;
 		then = now;
+		update();
+		render(gctx);
 		requestAnimationFrame(main);
 	};
 	var update = function(){
-
+		tiles.forEach(function(tile){
+			tile.update();
+		})
 	};
-	var render = function(){
-		for(var i = 0; i < 50; i++){
-			gctx.drawImage("public/assets/tiles/water.png")
-		};
+	var render = function(ctx){
+		tiles.forEach(function(tile){
+			tile.draw(ctx);
+		})
 	};
 	var then = Date.now();
 	main();

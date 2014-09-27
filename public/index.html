@@ -3,21 +3,22 @@
 <head>
 	<title>RTShips</title>
 	<link rel="stylesheet" href="css/style.css">
-	<script src="js/ship.js"></script>
 	<script src="js/jquery.js"></script>
-	<script src="js/phaser.js"></script>
+	<script src="js/ship.js"></script>
+	<script src="js/tile.js"></script>
 	<script src="js/vars.js"></script>
 	<script src="js/initGame.js"></script>
 </head>
 
 <body>
-	<script src = "/socket.io/socket.io.js"></script>
+	<!--script src = "/socket.io/socket.io.js"></script-->
 	<canvas id="game"></canvas>
 	<script>
-		var socket = io();
+		//var socket = io();
 		var running = false;
 		$(document).ready(function(){
-			socket.on("waitForJoin", function () {
+			initGame();
+			/*socket.on("waitForJoin", function () {
 				alert("Waiting for another player to join!");
 			});
 			socket.on('initIdentity', function(identity){
@@ -38,7 +39,7 @@
 			socket.on("yourTurn", function(serverPlayers) {
 				players = serverPlayers;
 				alert("yourTurn " + serverPlayers[name].turn);
-			});
+			});*/
 		});
 	</script>
 </body>
