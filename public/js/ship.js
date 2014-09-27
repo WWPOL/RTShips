@@ -52,13 +52,13 @@ Ship.prototype.draw = function(ctx) {
 		ctx.translate(this.x, this.y);
 		//ctx.rotate(this.direction);
 		if (this.type === "battleship") {
-			ctx.drawImage(this.sprite, 0,0, 50, 150);
+			ctx.drawImage(this.sprite, 0,0, 25, 75);
 		} else if (this.type === "destroyer") {
-			ctx.drawImage(this.sprite,0,0, 50, 100)
+			ctx.drawImage(this.sprite,0,0, 25, 50)
 		} else if (this.type === "scout") {
-			ctx.drawImage(this.sprite,0,0, 50, 50)
+			ctx.drawImage(this.sprite,0,0, 25, 25)
 		} else if (this.type === "sub") {
-			ctx.drawImage(this.sprite,0,0, 50, 50)
+			ctx.drawImage(this.sprite,0,0, 25, 25)
 		}
 		ctx.restore();
 	}
