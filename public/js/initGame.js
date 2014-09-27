@@ -7,9 +7,9 @@ function initGame(){
 
 	var ship = new Ship(50,50,"battleship","red");
 
-	for (var x = 0; x < gcanvas.width/50;x++) {
-		for (var y = 0; y < gcanvas.height/50;y++) {
-			var tile = new Tile(x*50,y*50,"water");
+	for (var x = 0; x < 50;x++) {
+		for (var y = 0; y < 30;y++) {
+			var tile = new Tile(x*25,y*25,"water");
 			tiles.push(tile);
 		}
 	}
