@@ -23,7 +23,7 @@ io.on('connection', function(socket){
 
 	if (connectedUsers.length == 2) {
 		console.log("game start");
-		io.emit("initgame");
+		io.emit("initGame");
 	}
 
 	socket.on('disconnect', function(){
