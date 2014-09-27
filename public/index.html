@@ -10,14 +10,21 @@
 </head>
 
 <body>
-	<!--script src = "/socket.io/socket.io.js"></script-->
+	<script src = "/socket.io/socket.io.js"></script>
 	<canvas id="game"></canvas>
 	<script>
-		//var socket = io();
+		var socket = io();
+		var name;
 		$(document).ready(function(){
-			//socket.on('initGame', function(){
-				initGame();
-			//});
+			socket.on('initIdentity', function(identity){
+				name = identity;
+			});
+			socket.on('initGame', function(){
+				initGame(name);
+			});
+			socket.on('full', function(){
+				alert("Server is full. Please come again");
+			})
 		});
 	</script>
 	
