@@ -1,4 +1,12 @@
-function initGame() {
+function initGame(name) {
+	var gamecanvas = document.getElementById("game");
+	var gamectx = gamecanvas.getContext("2d");
+	gamecanvas.addEventListener("mousemove", function (e) {
+		var rect = gamecanvas.getBoundingClientRect();
+		mouseX = e.clientX - rect.left;
+		mouseY = e.clientY - rect.top;
+	}, false);
+
 	var game = new Phaser.Game(clientWidth,clientHeight,Phaser.Auto,'rtships',{preload: preload, create: create, update: update, render: render});
 
 	function preload() {
@@ -36,14 +44,15 @@ function initGame() {
 		tiles = game.add.tileSprite(0,0,clientWidth,clientHeight, 'water');
 		tiles.fixedToCamera = true;
 		cursor = game.add.sprite(clientWidth/2,clientHeight/2,'cursor');
-			cursor.scale.set(0.0125);
 			game.phsics.p2.enable(cursor);
-			player.body.setZeroDamping();
-			player.body.setRectangle(25,25);
+			cursor.body.setZeroDamping();
+			cursor.body.setRectangle(25,25);
 			game.camera.follow(cursor);
 	}
 
 	function update() {
+		cursor.body.x = mouseX;
+		cursor.body.y = mouseY;
 		if (!game.camera.atLimit.x)
 	    {
 	        tiles.tilePosition.x -= (cursor.body.velocity.x * 2) * game.time.physicsElapsed;

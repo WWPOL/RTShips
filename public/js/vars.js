@@ -3,11 +3,13 @@ var clientWidth = document.documentElement.clientWidth;
 var clientHeight = document.documentElement.clientHeight;
 var players = {
 	p1: {
-		boolean: yourTurn,
+		yourTurn: true,
 		ships: []
 	},
 	p2: {
-		boolean: yourTurn,
+		yourTurn: false,
 		ships: []
 	}
 }
+var mouseX = 0;
+var mouseY = 0;
