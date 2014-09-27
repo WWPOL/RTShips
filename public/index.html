@@ -23,9 +23,8 @@
 				name = identity;
 				alert(identity);
 			});
-			socket.on('initGame', function(players){
+			socket.on('initGame', function(){
 				alert("Initializing game!");
-				players = players;
 				initGame(name, players);
 				running = true;
 			});

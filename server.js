@@ -8,16 +8,7 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-var players = {
-	p1: {
-		turn: true,
-		ships: []
-	},
-	p2: {
-		turn: false,
-		ships: []
-	}
-}
+var players = {}
 
 var connectedUsers = []; //keep to two
 var gameStart = false;
@@ -49,7 +40,7 @@ io.on('connection', function(socket){
 		console.log("game start");
 		gameStart = true;
 		//initialize();
-		io.emit("initGame", players);
+		io.emit("initGame");
 	}
 
 	socket.on('disconnect', function(){
@@ -61,21 +52,8 @@ io.on('connection', function(socket){
 	//////////////////////////
 
 	socket.on("move", function (ships) {
-		console.log("move emitted");
-		for (var i = 0; i < 2; i++) {
-			if (socket.id === players[i].socket) { //check who sent move
-				if (players[i].turn) {
-					players[i].turn = false;
-					players[Math.abs(i-1)].turn = true;	
-					console.log(players);
-					io.to(players[Math.abs(i-1)].socket).emit("yourTurn");
-				}
-				else {
-					console.log("player " + players[i].id + " has already moved.");
-				}
-			}
-		}
-		
+		var movingPlayer = "p" + (connectedUsers.indexOf(socket.id)+1);
+		console.log(movingPlayer);
 	});
 
 });
