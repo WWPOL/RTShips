@@ -8,12 +8,16 @@
 </head>
 
 <body>
-	<script src = "/socket.io/socket.io.js">
-	</script>
+	<script src = "/socket.io/socket.io.js"></script>
+	<canvas id="game"></canvas>
 	<script>
 		var socket = io();
+		$(document).ready(function(){
+			socket.on('initGame', function(){
+				initGame();
+			});
+		});
 	</script>
-	<canvas id="game"></canvas>
-	<h1>Hello, World!</h1>
+	
 </body>
 </html>
