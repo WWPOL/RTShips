@@ -27,15 +27,8 @@ io.on('connection', function(socket){
 	//stuff about connections
 	socket.emit('initIdentity', socket.id);
 	console.log("A user connected");
-	connectedUsers.push(socket.id);
+	connectedUsers.push([socket.id,0]);
 	console.log(connectedUsers);
-
-	if(connectedUsers.length == 1){
-		socket.emit('initIdentity', 'p1')
-	}
-	if(connectedUsers.length == 2){
-		socket.emit("initIdentity", 'p2');
-	}
 
 	if (connectedUsers.length > 2) {
 		console.log(connectedUsers.length + " users");
@@ -52,6 +45,22 @@ io.on('connection', function(socket){
 		//initialize();
 		io.emit("initGame");
 	}
+
+	socket.on("whack", function () {
+		var current;
+		for (var i = 0; i < connectedUsers.length; i++) {
+			if (connectedUsers[i][0] == socket.id) {
+				connectedUsers[i][1]++;
+				console.log(connectedUsers[i][1]);
+				current = i;
+			}
+		}
+		if (connectedUsers[current][1] == 4) {
+			io.to(socket.id).emit("win");
+			io.emit("gameover");
+		}
+
+	});
 
 	socket.on('disconnect', function(){
 		connectedUsers.splice(connectedUsers.indexOf(socket.id));

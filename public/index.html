@@ -4,37 +4,109 @@
 	<title>RTShips</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery.js"></script>
-	<script src="js/ship.js"></script>
-	<script src="js/tile.js"></script>
-	<script src="js/vars.js"></script>
-	<script src="js/initGame.js"></script>
 	
 </head>
 
 <body>
-	<!--script src = "/socket.io/socket.io.js"></script-->
-	<canvas id="game"></canvas>
+	<script src = "/socket.io/socket.io.js"></script>
+	<canvas id="game" width = "1300" height = "700"></canvas>
 	<script>
-		//var socket = io();
-		var running = false;
-		var mouseX;
-		var mouseY;
-		var mouseDown = false;
+		var gcanvas = document.getElementById('game');
+		var gctx = gcanvas.getContext('2d');
 
-		initGame();
+		var shipArray = [];
+		var coordArray = [];
+
+		var socket = io();
+
+		shipArray[0] = new Image();
+		shipArray[0].src = "assets/ships/bluebattleship.png";
+		shipArray[1] = new Image();
+		shipArray[1].src = "assets/ships/bluedestroyer.png";
+		shipArray[2] = new Image();
+		shipArray[2].src = "assets/ships/bluescout.png";
+		shipArray[3] = new Image();
+		shipArray[3].src = "assets/ships/bluesub.png";
+
+		var explosion = new Image();
+		explosion.src = "assets/ships/explosion.png";
+
+		function randomXY() {
+			var x = Math.floor((Math.random()*20))*50+100;
+			var y = Math.floor((Math.random()*8))*50+100;
+			return [x,y];
+		}
+
+		function compareXY(x1,y1,x2,y2) {
+			var xSquared = (x2-x1)*(x2-x1);
+			var ySquared = (y2-y1)*(y2-y1);
+			return Math.sqrt(xSquared + ySquared);
+		}
+		//alert("HI");
+
+			var running = false;
+			var mouseX = 0;
+			var mouseY = 0;
+			var mousedown = false;
+
+			window.addEventListener("mousemove", function (e) {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				//console.log(mouseX + " " + mouseY);
+			}, false);
+
+			window.addEventListener('mousedown', function (e) {
+				mousedown = true; // Starts the firing if statement
+				console.log("HI");
+				console.log(mouseX + " " + mouseY);
+				for (var i = 0; i < coordArray.length; i++) {
+					//console.log(compareXY(mouseX,mouseY,coordArray[i][0],coordArray[i][1]));
+					if (compareXY(mouseX,mouseY,coordArray[i][0],coordArray[i][1]) < 100) {
+						//alert("HI");
+						console.log(compareXY(mouseX,mouseY,coordArray[i][0],coordArray[i][1]));
+						gctx.save();
+						gctx.translate(coordArray[i][0],coordArray[i][1]);
+						gctx.clearRect(-50,-150,100,300);
+						gctx.drawImage(explosion,-50,-50);
+						gctx.restore();
+						coordArray.splice(i,1);
+						socket.emit("whack");
+						return;
+					}
+				}
+			}, false);
+			window.addEventListener('mouseup', function (e) {
+				mousedown = false;
+			}, false);
+
+		function initGame() {
+			//gctx.fillRect(0,0,100,100);
+			setTimeout(function() {
+				for (var i = 0; i < shipArray.length; i++) {
+					//alert(i);
+					var xyArray = randomXY();
+					coordArray.push(xyArray);
+					gctx.save();
+					gctx.translate(xyArray[0],xyArray[1]);
+					gctx.drawImage(shipArray[i], -50, -150);
+					gctx.restore();
+					console.log("DRAWING");
+					console.log(xyArray[0], xyArray[1]);
+				}
+			},1000);
+
+
+
+		}
+
 
 		$(document).ready(function(){
-			initGame();
-			/*socket.on("waitForJoin", function () {
+			socket.on("waitForJoin", function () {
 				alert("Waiting for another player to join!");
-			});
-			socket.on('initIdentity', function(identity){
-				name = identity;
-				alert(identity);
 			});
 			socket.on('initGame', function(){
 				alert("Initializing game!");
-				initGame(name, socket);
+				initGame();
 				running = true;
 			});
 			socket.on('full', function(){
@@ -43,11 +115,15 @@
 			socket.on("disconnect", function() {
 				alert("The other user disconnected.");
 			});
-			socket.on("yourTurn", function(serverPlayers) {
-				players = serverPlayers;
-				alert("yourTurn " + serverPlayers[name].turn);
-			});*/
+			socket.on("win", function() {
+				alert("YOU WIN!!!");
+			});
+			socket.on("gameover", function () {
+				alert("Game over!");
+			});
 		});
+
+
 	</script>
 </body>
 </html>
